@@ -53,6 +53,21 @@ async function migrate() {
       CREATE INDEX IF NOT EXISTS idx_categories_user_id ON categories(user_id);
     `);
 
+    await query(`
+      CREATE TABLE IF NOT EXISTS savings_goals (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        target_percentage DECIMAL(5, 2) NOT NULL CHECK (target_percentage >= 0 AND target_percentage <= 100),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(user_id)
+      );
+    `);
+
+    await query(`
+      CREATE INDEX IF NOT EXISTS idx_savings_goals_user_id ON savings_goals(user_id);
+    `);
+
     console.log('Migrations completed successfully!');
     await pool.end();
     process.exit(0);

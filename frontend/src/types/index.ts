@@ -46,6 +46,21 @@ export interface CategoryInput {
   color?: string;
 }
 
+export interface SavingsGoal {
+  id: number;
+  user_id: number;
+  target_percentage: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SavingsProgress {
+  month: string;
+  total_income: string;
+  total_expenses: string;
+  savings_rate: number;
+}
+
 export interface Analytics {
   summary: {
     total_income: string;

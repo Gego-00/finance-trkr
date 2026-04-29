@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Categories from './pages/Categories';
 import Settings from './pages/Settings';
+import SavingsGoals from './pages/SavingsGoals';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { token, isLoading } = useAuth();
@@ -71,6 +72,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Categories />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/savings-goals"
+              element={
+                <PrivateRoute>
+                  <SavingsGoals />
                 </PrivateRoute>
               }
             />

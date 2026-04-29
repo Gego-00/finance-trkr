@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { AuthResponse, Category, CategoryInput, Transaction, TransactionInput, Analytics } from '../types';
+import type { AuthResponse, Category, CategoryInput, Transaction, TransactionInput, Analytics, SavingsGoal, SavingsProgress } from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -42,6 +42,14 @@ export const transactionsApi = {
   delete: (id: number) => api.delete(`/transactions/${id}`),
   getAnalytics: (params?: { startDate?: string; endDate?: string }) =>
     api.get<Analytics>('/transactions/analytics', { params }),
+};
+
+export const savingsGoalsApi = {
+  getGoal: () => api.get<SavingsGoal | null>('/savings-goals'),
+  upsertGoal: (targetPercentage: number) =>
+    api.put<SavingsGoal>('/savings-goals', { targetPercentage }),
+  getProgress: (months?: number) =>
+    api.get<SavingsProgress[]>('/savings-goals/progress', { params: { months } }),
 };
 
 export default api;

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
 import transactionRoutes from './routes/transactions';
 import categoryRoutes from './routes/categories';
+import savingsGoalRoutes from './routes/savingsGoals';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/savings-goals', savingsGoalRoutes);
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);

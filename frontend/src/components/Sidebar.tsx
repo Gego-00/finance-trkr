@@ -4,6 +4,7 @@ import {
   LayoutDashboard,
   Receipt,
   Tags,
+  Target,
   Settings,
   ChevronLeft,
   ChevronRight,
@@ -27,6 +28,11 @@ const navItems = [
     title: 'Categories',
     href: '/categories',
     icon: Tags,
+  },
+  {
+    title: 'Savings Goals',
+    href: '/savings-goals',
+    icon: Target,
   },
   {
     title: 'Settings',
