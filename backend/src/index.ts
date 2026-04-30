@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 const corsOptions = {
   origin: [
     'http://localhost:5173',
-    'http://localhost:3001',
+    'http://localhost:3000',
     'https://finance-trkr-gui.vercel.app',  
     /\.vercel\.app$/  
   ],
