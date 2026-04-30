@@ -23,6 +23,6 @@ app.use('/api/transactions', transactionRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/savings-goals', savingsGoalRoutes);
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

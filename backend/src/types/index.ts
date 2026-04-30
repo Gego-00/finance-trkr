@@ -28,7 +28,11 @@ export interface Transaction {
   updated_at: Date;
 }
 
-export interface AuthRequest extends Express.Request {
+export interface AuthRequest extends Request {
+  body: any;
+  params: { id: number; };
+  query: any;
+  headers: any;
   user?: {
     id: number;
     email: string;

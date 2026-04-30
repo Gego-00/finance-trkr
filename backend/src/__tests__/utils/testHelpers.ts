@@ -1,34 +1,70 @@
 import { Request, Response } from 'express';
 import { AuthRequest } from '../../types';
 
-export const mockRequest = (data: Partial<Request> = {}): Partial<Request> => ({
-  body: {},
-  params: {},
-  query: {},
-  headers: {},
-  ...data,
-});
+// Tipo helper para mockear Request
+type MockRequest<T = any> = Partial<Request> & {
+  body?: T;
+  params?: Record<string, string>;
+  query?: Record<string, string | string[]>;
+  headers?: Record<string, string>;
+};
 
-export const mockAuthRequest = (
+// Tipo helper para mockear AuthRequest
+type MockAuthRequest<T = any> = Partial<AuthRequest> & {
+  body?: T;
+  params?: Record<string, string>;
+  query?: Record<string, string | string[]>;
+  headers?: Record<string, string>;
+  user?: { id: number; email: string };
+};
+
+export const mockRequest = <T = any>(
+  data: Partial<Request> = {}
+): MockRequest<T> => {
+  return {
+    body: {},
+    params: {},
+    query: {},
+    headers: {},
+    method: 'GET',
+    url: '/',
+    get: jest.fn(),
+    header: jest.fn(),
+    ...data,
+  } as MockRequest<T>;
+};
+
+export const mockAuthRequest = <T = any>(
   userId: number,
   email: string,
   data: Partial<AuthRequest> = {}
-): Partial<AuthRequest> => ({
-  body: {},
-  params: {},
-  query: {},
-  headers: {},
-  user: { id: userId, email },
-  ...data,
-});
+): MockAuthRequest<T> => {
+  return {
+    body: {},
+    params: {},
+    query: {},
+    headers: {},
+    method: 'GET',
+    url: '/',
+    user: { id: userId, email },
+    get: jest.fn(),
+    header: jest.fn(),
+    ...data,
+  } as unknown as MockAuthRequest<T>;
+};
 
 export const mockResponse = (): Partial<Response> => {
-  const res: Partial<Response> = {
+  const res = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn().mockReturnThis(),
     send: jest.fn().mockReturnThis(),
+    sendStatus: jest.fn().mockReturnThis(),
+    end: jest.fn().mockReturnThis(),
+    setHeader: jest.fn().mockReturnThis(),
+    cookie: jest.fn().mockReturnThis(),
+    clearCookie: jest.fn().mockReturnThis(),
   };
-  return res;
+  return res as unknown as Partial<Response>;
 };
 
 export const mockNext = jest.fn();

@@ -7,13 +7,13 @@ import {
 } from '../controllers/categoryController';
 import { authenticateToken } from '../middleware/auth';
 
-const router = Router();
+const router: Router = Router();
 
 router.use(authenticateToken);
 
-router.get('/', getCategories);
-router.post('/', createCategory);
-router.put('/:id', updateCategory);
-router.delete('/:id', deleteCategory);
+router.get('/', getCategories as any);
+router.post('/', createCategory as any);
+router.put('/:id', updateCategory as any);
+router.delete('/:id', deleteCategory as any);
 
 export default router;

@@ -6,12 +6,12 @@ import {
 } from '../controllers/savingsGoalController';
 import { authenticateToken } from '../middleware/auth';
 
-const router = Router();
+const router: Router = Router();
 
 router.use(authenticateToken);
 
-router.get('/', getGoal);
-router.put('/', upsertGoal);
-router.get('/progress', getProgress);
+router.get('/', getGoal as any);
+router.put('/', upsertGoal as any);
+router.get('/progress', getProgress as any);
 
 export default router;

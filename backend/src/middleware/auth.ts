@@ -21,7 +21,7 @@ export const authenticateToken = (
       return res.status(403).json({ error: 'Invalid or expired token' });
     }
 
-    (req as AuthRequest).user = decoded as { id: number; email: string };
+    (req as unknown as AuthRequest).user = decoded as { id: number; email: string };
     next();
   });
 };
