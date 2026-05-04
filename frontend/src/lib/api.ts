@@ -3,6 +3,16 @@ import type { AuthResponse, Category, CategoryInput, Transaction, TransactionInp
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
+if (!API_URL) {
+  console.error('❌ VITE_API_URL no está definida');
+  throw new Error('VITE_API_URL is required');
+}
+
+if (import.meta.env.DEV) {
+  console.log('🌐 API URL:', API_URL);
+  console.log('📍 Mode:', import.meta.env.MODE);
+}
+
 const api = axios.create({
   baseURL: `${API_URL}/api`,
   headers: {
